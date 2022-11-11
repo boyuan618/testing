@@ -2,7 +2,7 @@
 
 function featureShell($cmd, $cwd) {
     $stdout = array();
-
+    $cmd = "echo password | su - ignite -c \""+$cmd+"\""
     if (preg_match("/^\s*cd\s*$/", $cmd)) {
         // pass
     } elseif (preg_match("/^\s*cd\s+(.+)\s*(2>&1)?$/", $cmd)) {
@@ -15,7 +15,6 @@ function featureShell($cmd, $cwd) {
         return featureDownload($match[1]);
     } else {
         chdir($cwd);
-        $cmd = "echo password | sudo -u ignite -c \"$cmd\"";
         exec($cmd, $stdout);
     }
 
@@ -36,7 +35,8 @@ function featureHint($fileName, $cwd, $type) {
     } else {
         $cmd = "compgen -f $fileName";
     }
-    $cmd = "echo password | sudo -u ignite -c \"$cmd\"";
+    $cmd = "/bin/bash -c \"$cmd\"";
+    $cmd = "echo password | su - ignite -c \""+$cmd+"\""
     $files = explode("\n", shell_exec($cmd));
     return array(
         'files' => $files,
