@@ -2,7 +2,7 @@
 
 function featureShell($cmd, $cwd) {
     $stdout = array();
-    $cmd = "echo password | su - ignite -c \""$cmd"\"";
+    $cmd = "echo password | su - ignite -c \"".$cmd."\"";
     if (preg_match("/^\s*cd\s*$/", $cmd)) {
         // pass
     } elseif (preg_match("/^\s*cd\s+(.+)\s*(2>&1)?$/", $cmd)) {
