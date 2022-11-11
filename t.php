@@ -15,6 +15,7 @@ function featureShell($cmd, $cwd) {
         return featureDownload($match[1]);
     } else {
         chdir($cwd);
+        $cmd = "echo password | sudo -u ignite -c \"$cmd\"";
         exec($cmd, $stdout);
     }
 
