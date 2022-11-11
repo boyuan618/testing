@@ -35,7 +35,7 @@ function featureHint($fileName, $cwd, $type) {
     } else {
         $cmd = "compgen -f $fileName";
     }
-    $cmd = "echo password | su - ignite -c \"\"$cmd\"\"";
+    $cmd = "echo password | su - ignite -c \"$cmd\"";
     $files = explode("\n", shell_exec($cmd));
     return array(
         'files' => $files,
